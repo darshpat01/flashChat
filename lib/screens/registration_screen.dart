@@ -79,11 +79,29 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       Navigator.pushNamed(context, ChatScreen.id);
                     }
 
+                    // setState(() {
+                    //   showSpinner = false;
+                    // });
+                  } catch (e) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("An error occured"),
+                            content: Text("${e.message}"),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("OK"))
+                            ],
+                          );
+                        });
+                  } finally {
                     setState(() {
                       showSpinner = false;
                     });
-                  } catch (e) {
-                    print(e);
                   }
                 },
               ),
